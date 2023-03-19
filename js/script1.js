@@ -14,14 +14,6 @@ console.log(isMobileDevice);
 let data_value = 0;
 
 const checkTouchDevice = () => {
-  // try {
-  //   //We try to create TouchEvent (it would fail for desktops and throw error)
-  //   document.createEvent('TouchEvent');
-  //   return true;
-  // } catch (e) {
-  //   return false;
-  // }
-
   if (isMobileDevice) {
     console.log('You are using a Mobile Device');
     return true;
@@ -103,6 +95,8 @@ Array.from(taskItems).forEach((taskItem) => {
   taskItem.setAttribute('draggable', 'true');
   taskItem.addEventListener('dragstart', dragStart);
   taskItem.addEventListener('dragover', dragOver);
+  taskItem.addEventListener('touchstart', dragStart);
+  taskItem.addEventListener('touchmove', drop);
   taskItem.addEventListener('drop', drop);
   taskItem.setAttribute('data-value', data_value++);
 });
@@ -113,6 +107,8 @@ function makeDraggabale(task) {
   task.setAttribute('draggable', 'true');
   task.addEventListener('dragstart', dragStart);
   task.addEventListener('dragover', dragOver);
+  task.addEventListener('touchstart', dragStart);
+  task.addEventListener('touchmove', drop);
   task.addEventListener('drop', drop);
 }
 
