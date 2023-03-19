@@ -10,6 +10,7 @@ html {
 
 body {
   background-color: #009578;
+  height: 100%;
 }
 
 /* Center the title */
@@ -103,4 +104,15 @@ button {
 .edit-icon:hover,
 .delete-icon:hover {
   cursor: pointer;
+}
+
+.made-by-me {
+  color: aliceblue;
+  font-size: 1.8rem;
+  text-align: center;
+  /* display: inline-block; */
+}
+footer {
+  margin-top: 20%;
+  margin-bottom: 0.5rem;
 }
