@@ -1,28 +1,39 @@
+/* Storing user's device details in a variable*/
+let details = navigator.userAgent;
+
+/* Creating a regular expression
+containing some mobile devices keywords
+to search it in details string*/
+let regexp = /android|iphone|kindle|ipad/i;
+
+/* Using test() method to search regexp in details
+it returns boolean value*/
+let isMobileDevice = regexp.test(details);
+
+console.log(isMobileDevice);
 let data_value = 0;
 
-/// check wether we use a mobile or a laptop
 const checkTouchDevice = () => {
-  try {
-    //We try to create TouchEvent (it would fail for desktops and throw error)
-    document.createEvent('TouchEvent');
+  // try {
+  //   //We try to create TouchEvent (it would fail for desktops and throw error)
+  //   document.createEvent('TouchEvent');
+  //   return true;
+  // } catch (e) {
+  //   return false;
+  // }
+
+  if (isMobileDevice) {
+    console.log('You are using a Mobile Device');
     return true;
-  } catch (e) {
+  } else {
+    console.log('You are using Desktop');
     return false;
   }
 };
 
-let currentElement;
-
-//Drag and drop functions
-function dragStart(e) {
-  initialX = checkTouchDevice() ? e.touches[0].clientX : e.clientX;
-  initialY = checkTouchDevice() ? e.touches[0].clientY : e.clientY;
-  //Set current Element
-  currentElement = e.target;
-}
-function dragOver(e) {
-  e.preventDefault();
-}
+let currentElement = '';
+let initialX = 0,
+  initialY = 0;
 
 //Returns element index with given value
 const getPosition = (value) => {
@@ -36,6 +47,17 @@ const getPosition = (value) => {
   });
   return elementIndex;
 };
+
+//Drag and drop functions
+function dragStart(e) {
+  initialX = checkTouchDevice() ? e.touches[0].clientX : e.clientX;
+  initialY = checkTouchDevice() ? e.touches[0].clientY : e.clientY;
+  //Set current Element
+  currentElement = e.target;
+}
+function dragOver(e) {
+  e.preventDefault();
+}
 
 const drop = (e) => {
   e.preventDefault();
@@ -87,14 +109,14 @@ Array.from(taskItems).forEach((taskItem) => {
 
 //////////////////////////////////////////// Add Buttons //////////////////////////////
 
-let addButtons = document.querySelectorAll('.add-button');
-
 function makeDraggabale(task) {
   task.setAttribute('draggable', 'true');
   task.addEventListener('dragstart', dragStart);
   task.addEventListener('dragover', dragOver);
   task.addEventListener('drop', drop);
 }
+
+let addButtons = document.querySelectorAll('.add-button');
 
 //load Tasks
 function loadTasks() {
